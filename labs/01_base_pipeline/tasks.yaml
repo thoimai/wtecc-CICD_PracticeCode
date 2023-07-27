@@ -1,11 +1,15 @@
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
-  name: hello-world 
+  name: echo
 spec:
+  params: 
+    - name: "message"
+      type: string 
+      description: "The message to echo"
   steps:
-    - name: echo
+    - name: echo-message 
       image: alpine:3 
       command: [/bin/echo]
-      args: ["Hello World"]
-      
+      args: ["${params.message}"]
+
