@@ -6,10 +6,9 @@ spec:
   params: 
     - name: message
       type: string 
-      description: "The message to echo"
+      description: The message to echo
   steps:
     - name: echo-message 
       image: alpine:3 
       command: [/bin/echo]
-      args: ["${params.message}"]
-
+      args: ["$(params.message)"]
