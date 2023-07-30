@@ -25,6 +25,13 @@ John Rofrano, Senior Technical Staff Member, DevOps Champion, @ IBM Research
 
 * Apply pipeline to the cluster: 
     `kubectl apply -f pipeline.yaml`
-Apply the new task definition to the cluster:
+* Apply the new task definition to the cluster:
     `kubectl apply -f tasks.yaml`
     
+* Run the cd-pipeline 
+```shell 
+tkn pipeline start cd-pipeline \
+    --showlog \
+    -p repo-url="https://github.com/ibm-developer-skills-network/wtecc-CICD_PracticeCode.git" \
+    -p branch="main"
+``` 
