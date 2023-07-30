@@ -12,3 +12,23 @@ spec:
       image: alpine:3 
       command: [/bin/echo]
       args: ["$(params.message)"]
+---
+apiVersion: tekton.dev/v1beta1 
+kind: Task
+metadata: 
+  name: checkout 
+spec: 
+  params: 
+    - name: repo-url 
+      type: string 
+      description: The git repository URL to clone from 
+    - name: branch 
+      type: string 
+      description: The git branch to checkout 
+  steps: 
+    - name: checkout 
+      image: bitnami/git:latest 
+      script: | 
+        #!/bin/sh 
+        git clone $(params.repo-url) . 
+        git checkout $(params.branch)
