@@ -4,7 +4,7 @@ metadata:
   name: echo
 spec:
   params: 
-    - name: "message"
+    - name: message
       type: string 
       description: "The message to echo"
   steps:
