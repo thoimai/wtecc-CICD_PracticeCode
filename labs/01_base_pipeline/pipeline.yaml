@@ -12,3 +12,29 @@ spec:
     params: 
       - name: message
         value: "$(params.message)"
+---
+apiVersion: tekton.dev/v1beta1 
+kind: Pipeline 
+metadata: 
+  name: cd-pipeline 
+spec: 
+  params: 
+    - name: repo-url 
+      type: string 
+      description: the git repository URL 
+    - name: branch 
+      type: string 
+      description: the git branch to checkout 
+      default: "master"
+  tasks: 
+    - name: clone 
+      taskRef:
+        name: checkout 
+      params: 
+        - name: repo-url
+          value: $(params.repo-url)
+        - name: branch 
+          value: $(params.branch)
+        - name: deleteExisting 
+          value: "true"
+      

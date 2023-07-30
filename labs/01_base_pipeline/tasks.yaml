@@ -28,7 +28,7 @@ spec:
   steps: 
     - name: checkout 
       image: bitnami/git:latest 
-      script: | 
-        #!/bin/sh 
-        git clone $(params.repo-url) . 
-        git checkout $(params.branch)
+      command: [git]
+      args: ["clone", "--branch", "$(params.branch)", "$(params.repo-url)"]
+
+      
