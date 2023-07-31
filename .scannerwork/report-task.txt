@@ -1,0 +1,6 @@
+projectKey=temp
+serverUrl=https://u1513319-9000.theiadocker-3-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai
+serverVersion=10.1.0.73491
+dashboardUrl=https://u1513319-9000.theiadocker-3-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/dashboard?id=temp
+ceTaskId=AYmr8xG7Ff_9kO6CBJ7g
+ceTaskUrl=https://u1513319-9000.theiadocker-3-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/api/ce/task?id=AYmr8xG7Ff_9kO6CBJ7g
