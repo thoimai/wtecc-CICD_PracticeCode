@@ -1,4 +1,43 @@
+# Understanding Static Code Analysis
+Static code analysis, a debugging method that inspects source code, is performed in a non-runtime environment, meaning it examines the code without executing the program. This practice is also known as source code analysis.
 
+While testing is traditionally carried out by the coder running the program, source code analysis can be done even before a program has been finished. This gives developers the advantage of catching any mistakes early.
+
+Source code analysis tools, also known as Static Application Security Testing (SAST) tools, analyze your source code to find security flaws. SAST tools can be added into your IDE. They can help you detect issues during software development and can save time and effort, especially when compared to finding vulnerabilities later in the development cycle.
+
+# Task Breakdown 
+To get a SonarCube server up and running, you will:
+
+1. Create a Docker network for SonarQube and PostgreSQl to communicate on
+2. Set up PostgreSQL running in a Docker container
+3. Set up SonarQube running in a Docker container
+4. Download the SonarQube scanner Docker image
+5. Set up an alias to run scans using the sonar-scanner-cli Docker container
+6. Scan some code and interpret the results
+
+# Requirements to execute this experimentation
+
+> Docker images used 
+
+```shell
+theia@theiadocker-u1513319:/home/project/wtecc-CICD_PracticeCode$ docker images 
+REPOSITORY                      TAG       IMAGE ID       CREATED        SIZE
+sonarsource/sonar-scanner-cli   latest    5fd146eaf7b2   10 hours ago   358MB
+postgres                        latest    8769343ac885   3 days ago     412MB
+sonarqube                       latest    aea2e7f78453   5 days ago     702MB
+```
+> Docker container run 
+1. Required 3 containers 
+* SonarQube server container 
+* PostgreSQL database container 
+* SonarQube Scanner container 
+
+```shell
+theia@theiadocker-u1513319:/home/project/wtecc-CICD_PracticeCode$ docker ps -a 
+CONTAINER ID   IMAGE       COMMAND                  CREATED             STATUS             PORTS                                       NAMES
+8e59bdeaa531   sonarqube   "/opt/sonarqube/dock…"   About an hour ago   Up About an hour   0.0.0.0:9000->9000/tcp, :::9000->9000/tcp   sonarqube
+53a571fcc386   postgres    "docker-entrypoint.s…"   About an hour ago   Up About an hour   0.0.0.0:5432->5432/tcp, :::5432->5432/tcp   postgres
+```
 
 # Step 1: Setup PostgresSQL database 
 `docker network create mynet`
@@ -20,10 +59,18 @@ CONTAINER ID   IMAGE       COMMAND                  CREATED         STATUS      
 53a571fcc386   postgres    "docker-entrypoint.s…"   7 minutes ago   Up 7 minutes   0.0.0.0:5432->5432/tcp, :::5432->5432/tcp   postgres
 ```
 
+# Step 3: Log in to SonarQube 
+> SonarQube Server URL Access 
+`https://u1513319-9000.theiadocker-3-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/`
+
+
 # Step 4: Create a SonarQube Project 
+
+# Step 5: Generate SonarQube Scanner Token 
 
 > Generate project token 
 
++ SonarQube server's access token 
 `sqp_9667e5b7e9251205d71cb8c3051f93118c5e25b7`
 
 > Run SonarQube Analysis
@@ -35,7 +82,6 @@ sonar-scanner \
   -Dsonar.host.url=https://u1513319-9000.theiadocker-3-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai \
   -Dsonar.token=sqp_9667e5b7e9251205d71cb8c3051f93118c5e25b7
 ```
-
 
 # Step 6: Ready the SonarQube Scanner 
 
@@ -95,6 +141,11 @@ To view ideas for improving the diagram, use the key phrase "*show ideas*".
 
 To view other types of diagram and languages, use the key phrase "*explore diagrams*".
 
+# Step 7: Clone IBM CI/CD Python project 
+> Github repo to clone from 
+`https://github.com/thoimai/wtecc-CICD_PracticeCode.git`
+
+* After cloning this project, we perform static analysis scanning on this repo 
 
 # Step 8: Run the Scanner 
 
@@ -232,7 +283,7 @@ theia@theiadocker-u1513319:/home/project/wtecc-CICD_PracticeCode$
 ```
 
 
-# Intepret the result 
+# Step 9: Intepret the result 
 
 > Where is the risk 
 
