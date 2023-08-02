@@ -1,4 +1,4 @@
-# Adding GitHub Triggers
+# Set up Tekton Triggers
 
 ## visualize how Trigger works in Tekton
 
@@ -47,6 +47,7 @@ spec:
 In this example, `my-triggerbinding` is the name of the TriggerBinding. It extracts the `gitrevision` and `gitrepositoryurl` from the event payload.
 
 2. **Create a TriggerTemplate**: This will specify what Pipeline or Task to run and how to map the parameters to the Pipeline or Task.
+ + The TriggerTemplate takes the parameters passed in from the TriggerBinding and creates a PipelineRun to start the pipeline.
 
 ```yaml
 apiVersion: triggers.tekton.dev/v1alpha1
@@ -99,4 +100,38 @@ In this example, `my-trigger` is the name of the trigger. It references `my-trig
 Remember to apply these yaml files with `kubectl apply -f <filename.yaml>` command.
 
 For more details, you can refer to the [official Tekton Triggers documentation](https://tekton.dev/docs/triggers/triggerbindings/) and [TriggerTemplates](https://tekton.dev/docs/triggers/triggertemplates/).
+
+## Start a pipeline run 
+
+* List all running services in k8s cluster 
+
+```log
+[theia: 02_add_git_trigger]$ kubectl get services 
+NAME                    TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)             AGE
+el-cd-listener          ClusterIP   172.21.31.158   <none>        8080/TCP,9000/TCP   43m
+openshift-web-console   ClusterIP   172.21.133.39   <none>        8000/TCP            96m
+```
+
+* Pipeline running logs 
+
+```log
+[theia: project]$ tkn pipelinerun ls
+NAME                    STARTED          DURATION   STATUS
+cd-pipeline-run-d4d7n   57 seconds ago   31s        Succeeded
+[theia: project]$ tkn pipelinerun logs --last
+[clone : checkout] Cloning into 'wtecc-CICD_PracticeCode'...
+
+[lint : echo-message] Calling Flake8 linter...
+
+[tests : echo-message] Running unit tests with PyUnit...
+
+[build : echo-message] Building image for https://github.com/thoimai/wtecc-CICD_PracticeCode ...
+
+[deploy : echo-message] Deploying main branch of https://github.com/thoimai/wtecc-CICD_PracticeCode ...
+```
+
+# Take-away lessions: 
++ Learn to create a Tekton trigger to cause a pipeline run from external events like changes made to a repo in Github 
++ Know how to create EventListener, TriggerTemplates, TriggerBindings 
++ Know how to start a pipeline run on a port 
 
