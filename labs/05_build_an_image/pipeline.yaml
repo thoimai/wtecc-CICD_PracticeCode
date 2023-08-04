@@ -7,9 +7,13 @@ spec:
     - name: pipeline-workspace
   params:
     - name: repo-url
+      type: string 
     - name: branch
       default: master
+      type: string 
+      description: The branch to checkout 
     - name: build-image
+      description: The name of the image to build
   tasks:
     - name: init
       workspaces:

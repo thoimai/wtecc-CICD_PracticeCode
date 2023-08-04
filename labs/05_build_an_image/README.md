@@ -9,15 +9,16 @@
 
 ## Prerequisites
 
+## Step 6: Apply changes and run the Pipeline 
 
 
-## Start the Pipeline 
+### Start the Pipeline 
 
 ```shell
 tkn pipeline start cd-pipeline \
     -p repo-url="https://github.com/thoimai/wtecc-CICD_PracticeCode.git" \
     -p branch=main \
-    -p build-image=image-registry.openshift-image-registry.svc:5000/$SN_ICR_NAMESPACE/tekton-lab:0.1 \
+    -p build-image=image-registry.openshift-image-registry.svc:5000/$SN_ICR_NAMESPACE/tekton-lab:latest \
     -w name=pipeline-workspace,claimName=pipelinerun-pvc \
     --showlog
 ```
