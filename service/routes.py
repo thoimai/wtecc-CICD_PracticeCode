@@ -26,8 +26,8 @@ def index():
     app.logger.info("Request for Base URL")
     return jsonify(
         status=status.HTTP_200_OK,
-        message="Hit Counter Service",
-        version="1.0.0",
+        message="Thoi hit count services",
+        version="2.0.0",
         url=url_for("list_counters", _external=True),
     )
 

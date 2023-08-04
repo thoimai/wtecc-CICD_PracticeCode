@@ -1,3 +1,24 @@
 # Deploy to Kubernetes / OpenShift
 
-This folder holds the files for the lab: _Deploy to Kubernetes_ which is part of the **IBM-CD0215EN-Skills Network Introduction to CI/CD** course.
+# Task 1. Create a Docker image and store the Dockerfile
+
+## 1. Build image 
+
+docker build -t my_python_app:v1 .
+
+## 2. Run Image 
+
+docker run -p 4000:80 --name thoi-app demo-app:v1
+
+
+* Configure authentication 
+
+`gcloud auth configure-docker us-central1-docker.pkg.dev`
+
+`us-central1`: region of the repo 
+
++ Push the container to Artifact Registry
+
+
+* Build a newer image 
+`docker build -t us-central1-docker.pkg.dev/$PROJECT_ID/thoi-repo/thoi-app:v2 .`
