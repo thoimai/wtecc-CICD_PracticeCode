@@ -11,6 +11,9 @@
 
 ## Step 6: Apply changes and run the Pipeline 
 
+### Apply Tasks 
+
+
 
 ### Start the Pipeline 
 
@@ -93,6 +96,41 @@ TaskRun(s) cancelled: cd-pipeline-run-6nzz8-init
  ∙ build
  ∙ deploy
 ```
+
+2. Check the run status 
+
+`tkn pipelinerun ls`
+
+3. Check logs of the last run 
+
+`tkn pipelinerun logs --last`
+
+4. Check installed tasks 
+
+`tkn task ls`
+
+    + Install all the required Tasks for <cd-pipeline>
+        * Install git-clone task 
+            `tkn hub install task git-clone`
+        * Install flake8 task 
+        ```shell
+        tkn hub install task flake8
+        kubectl apply -f tasks.yaml
+        ```
+    
+    + Expected installed Tasks listing below: 
+    ```log
+    NAME               DESCRIPTION              AGE
+    cleanup            This task will clean...  2 minutes ago
+    git-clone          These Tasks are Git...   2 minutes ago
+    flake8             This task will run ...   1 minute ago
+    echo                                        46 seconds ago
+    nose                                        46 seconds ago
+    ```
+
+
+
+
 
 
 
